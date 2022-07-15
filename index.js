@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 
 const app = express();
 const router = express.Router();
+const port = process.env.PORT || 8080;
 
 let _mutante = (dna) => {
     const mutante = isMutant(dna);
@@ -25,6 +26,6 @@ router.post("/mutant", function (req, res) {
 app.use(bodyParser.json());
 app.use(router);
 
-app.listen(3000, function () {
-    console.log("Node server running on http://localhost:3000");
+app.listen(port, function () {
+    console.log(`Node server running on port ${port}`);
 });
