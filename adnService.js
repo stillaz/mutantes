@@ -29,10 +29,11 @@ let extractDiagonals = (array, data) => {
     data.push(secondary);
 }
 
-let validateMutante = (adn_data) => {
+let validateMutant = (adn_data) => {
     for (let data of adn_data) {
-        let encontrado = data.search(/(A|T|G|C)\1{3}/);
-        if (encontrado === 0) {
+        let validate = data.search(/(A|T|G|C)\1{3}/);
+        console.log(validate);
+        if (validate > -1) {
             return true;
         }
     }
@@ -41,11 +42,13 @@ let validateMutante = (adn_data) => {
 }
 
 export function isMutant(dna) {
-    let datos_adn = [];
+    let dnaData = [];
 
-    extractRows(dna, datos_adn);
-    extractColumns(dna, datos_adn);
-    extractDiagonals(dna, datos_adn);
-    console.log(datos_adn);
-    return validateMutante(datos_adn)
+    extractRows(dna, dnaData);
+    extractColumns(dna, dnaData);
+    extractDiagonals(dna, dnaData);
+    console.log(dnaData);
+    const isMutant = validateMutant(dnaData)
+    const code = dnaData.join('');
+    return { adnCode: code, isMutant, estructure: dnaData }
 }
